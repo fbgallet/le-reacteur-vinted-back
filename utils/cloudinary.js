@@ -1,5 +1,8 @@
 const cloudinary = require("cloudinary").v2;
 const convertToBase64 = require("../utils/convert");
+require("dotenv").config();
+
+console.log(process.env.CLOUDINARY_API_KEY);
 
 cloudinary.config({
   cloud_name: "dzfqscodm",
@@ -12,6 +15,7 @@ const uploadToCloudinaryAndGetUrl = async (buffer, options) => {
     convertToBase64(buffer),
     options
   );
+  console.log("File uploaded:", result);
   return result;
 };
 
