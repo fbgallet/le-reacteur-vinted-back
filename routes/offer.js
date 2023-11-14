@@ -130,13 +130,16 @@ router.delete("/offer/delete/:id", isAuthenticated, async (req, res) => {
 
 router.get("/offer/:id", async (req, res) => {
   try {
-    const offer = await Offer.findById(req.params.id);
+    const offer = await Offer.findById(req.params.id).populate({
+      path: "owner",
+      select: "account",
+    });
     if (!offer) {
       return res
         .status(400)
         .json({ message: "No offer corresponding to this id" });
     }
-    offer.owner = await User.findById(offer.owner).select("account");
+    // offer.owner = await User.findById(offer.owner).select("account");
     res.status(201).json(offer);
   } catch (error) {
     res.status(500).json({ message: error.message });

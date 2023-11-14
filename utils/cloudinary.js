@@ -1,13 +1,13 @@
 const cloudinary = require("cloudinary").v2;
 const convertToBase64 = require("../utils/convert");
-require("dotenv").config();
 
 console.log(process.env.CLOUDINARY_API_KEY);
-
+CLOUDINARY_NAME = dzfqscodm;
+COUDINARY_PUBLIC_API = 316947199737386;
 cloudinary.config({
-  cloud_name: "dzfqscodm",
-  api_key: "316947199737386",
-  api_secret: process.env.CLOUDINARY_API_KEY,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.COUDINARY_PUBLIC_API,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
 const uploadToCloudinaryAndGetUrl = async (buffer, options) => {
