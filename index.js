@@ -1,9 +1,14 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
+
+app.use(cors());
 app.use(express.json());
-mongoose.connect("mongodb://127.0.0.1:27017/Vinted"); // replace MyCluster
+
+// mongoose.connect("mongodb://127.0.0.1:27017/Vinted");
+mongoose.connect(process.env.MONGODB_URI);
 
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
