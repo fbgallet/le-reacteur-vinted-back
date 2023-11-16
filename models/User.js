@@ -5,7 +5,7 @@ const User = mongoose.model("User", {
   account: {
     username: String,
     avatar: {
-      type: Object, // nous verrons plus tard comment uploader une image
+      type: Object,
       default: null,
     },
   },
