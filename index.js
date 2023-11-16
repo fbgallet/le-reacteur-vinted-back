@@ -7,8 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//mongoose.connect("mongodb://127.0.0.1:27017/Vinted");
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI + "vinted");
 
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
