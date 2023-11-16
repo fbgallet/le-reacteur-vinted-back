@@ -50,14 +50,15 @@ router.post(
   async (req, res) => {
     try {
       const newOffer = req.body.offer;
-      // console.log(await newOffer.populate("owner"));
       if (req.files) {
-        newOffer.product_image = await uploadToCloudinaryAngGetUrl(
-          req.files.picture,
-          {
-            folder: `vinted/offers/${newOffer.owner}`,
-          }
+        newOffer.product_image = await Promise.all(
+          req.files.pictures.map((picture) =>
+            uploadToCloudinaryAngGetUrl(picture, {
+              folder: `vinted/offers/${newOffer.owner}`,
+            })
+          )
         );
+        newOffer.markModified("product_image");
       }
       newOffer.save();
       const populatedNewOffer = await newOffer.populate("owner");

@@ -6,8 +6,8 @@ const Offer = mongoose.model("Offer", {
   product_price: Number,
   product_details: Array,
   product_image: {
-    type: Object,
-    default: null,
+    type: [Object],
+    default: [],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
