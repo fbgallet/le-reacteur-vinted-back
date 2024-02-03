@@ -12,13 +12,17 @@ mongoose.connect(process.env.MONGODB_URI);
 
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
+const paymentRoutes = require("./routes/payment");
 app.use(userRoutes);
 app.use(offerRoutes);
+app.use(paymentRoutes);
 
 // Welcome Route
 app.get("/", (req, res) => {
   try {
-    res.status(200).json({ message: "Welcome on the server 👋" });
+    res.status(200).json({
+      message: "Welcome on the Vinted replica API by Fabrice Gallet 👋",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
