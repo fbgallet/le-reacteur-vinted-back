@@ -8,5 +8,4 @@
 3. [x] Offers filtering and sorting backend
 4. [x] Deployment on Northflank and MongoDB Atlas
 
-### B. Frontend
-1. [ ] Authenfication forms
+B. Frontend: [here is the repo](https://github.com/fbgallet/le-reacteur-vinted-front)
