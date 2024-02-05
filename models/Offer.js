@@ -5,7 +5,8 @@ const Offer = mongoose.model("Offer", {
   product_description: String,
   product_price: Number,
   product_details: Array,
-  product_image: {
+  product_image: Object,
+  product_pictures: {
     type: [Object],
     default: [],
   },

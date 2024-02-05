@@ -28,7 +28,7 @@ router.get("/offers", async (req, res) => {
             product_price: sort.slice(6),
           }
         : {};
-    const limitByPage = 5;
+    const limitByPage = 10;
 
     const offers = await Offer.find(filters)
       .select("product_name product_price -_id")
@@ -36,7 +36,7 @@ router.get("/offers", async (req, res) => {
       .limit(limitByPage)
       .skip((page - 1) * limitByPage);
     //console.log(offers);
-    res.status(201).json(offers);
+    res.status(201).json({ offers, count: offers.length });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -50,15 +50,19 @@ router.post(
   async (req, res) => {
     try {
       const newOffer = req.body.offer;
-      if (req.files) {
-        newOffer.product_image = await Promise.all(
+      if (req.files.length > 1) {
+        newOffer.product_pictures = await Promise.all(
           req.files.pictures.map((picture) =>
             uploadToCloudinaryAngGetUrl(picture, {
               folder: `vinted/offers/${newOffer.owner}`,
             })
           )
         );
-        newOffer.markModified("product_image");
+        newOffer.markModified("product_pictures");
+      } else {
+        uploadToCloudinaryAngGetUrl(newOffer.product_image, {
+          folder: `vinted/offers/${newOffer.owner}`,
+        });
       }
       newOffer.save();
       const populatedNewOffer = await newOffer.populate("owner");
