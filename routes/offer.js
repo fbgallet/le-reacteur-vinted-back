@@ -1,6 +1,5 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-//s;
 const uploadToCloudinaryAngGetUrl = require("../utils/cloudinary");
 const isAuthenticated = require("../middlewares/isAuthentificated");
 const isOfferOk = require("../middlewares/isOfferOk");
